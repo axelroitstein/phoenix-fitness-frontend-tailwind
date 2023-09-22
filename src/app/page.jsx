@@ -1,15 +1,14 @@
-import PaypalFunction from "./sections/paypalPay"
+import PaypalFunction from "./sections/paypal-pay.jsx"
 import Footer from "./sections/footer"
+import Header from "./sections/header"
 
 export default function Home() {
   return (
     <>
-    <main>
+      <Header/>
       <PaypalFunction/>
-    </main>
-    <footer>
       <Footer/>
-    </footer>
     </>
   )
 }
+ 

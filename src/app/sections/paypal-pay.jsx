@@ -1,10 +1,14 @@
 "use client"
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Saludo from "./saludo-pay";
 
 export default function PaypalFunction() {
   return (
     <>
-        <main>
+        <main className="flex justify-center place-items-center h-screen">
+          <div className="">
+          <Saludo/>
+          <div className="w-80 m-auto">
           <PayPalScriptProvider
             options={{
               clientId:
@@ -32,6 +36,8 @@ export default function PaypalFunction() {
               }}
             />
           </PayPalScriptProvider>
+          </div>
+          </div>
         </main>
     </>
   );

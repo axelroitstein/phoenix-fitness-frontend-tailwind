@@ -53,6 +53,6 @@ export async function POST() {
   console.log(response);
 
   return NextResponse.json({
-    id: response.result.id,
+    id: response.result.id, 
   });
 }
