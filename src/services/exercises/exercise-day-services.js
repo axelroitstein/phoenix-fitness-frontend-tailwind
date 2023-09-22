@@ -1,0 +1,127 @@
+export const createExerciseDay = async (data) => {
+  try {
+    const response = await fetch("http://localhost:3001/api/exerciseDays", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Allow-Control-Allow-Origin": "*",
+      },
+
+      body: data,
+    });
+
+    data = await response.json();
+    return data;
+  } catch (error) {
+    if (error.response)
+      return {
+        error: "response",
+        response: error.response.data,
+      };
+
+    if (error.request)
+      return {
+        error: "request",
+        message: "Cannot connect to server",
+      };
+
+    return {
+      error: "unknown",
+      message: "Unknown error",
+    };
+  }
+};
+
+export const getExerciseDayById = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:3001/api/exerciseDays/${id}`,
+      {
+        body: data,
+      }
+    );
+    data = await response.json();
+    return data;
+  } catch (error) {
+    if (error.response)
+      return {
+        error: "response",
+        response: error.response.data,
+      };
+
+    if (error.request)
+      return {
+        error: "request",
+        message: "Cannot connect to server",
+      };
+
+    return {
+      error: "unknown",
+      message: "Unknown error",
+    };
+  }
+};
+
+export const updateExerciseDay = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:3001/api/exerciseDays/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    data = await response.json();
+  
+} catch (error) {
+    if (error.response)
+      return {
+        error: "response",
+        response: error.response.data,
+      };
+
+    if (error.request)
+      return {
+        error: "request",
+        message: "Cannot connect to server",
+      };
+
+    return {
+      error: "unknown",
+      message: "Unknown error",
+    };
+  }
+};
+
+export const deleteExerciseDay = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:3001/api/exerciseDays/${id}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    return (response.message = "Ejercicio eliminado con éxito");
+  } catch (error) {
+    if (error.response)
+      return {
+        error: "response",
+        response: error.response.data,
+      };
+
+    if (error.request)
+      return {
+        error: "request",
+        message: "Cannot connect to server",
+      };
+
+    return {
+      error: "unknown",
+      message: "Unknown error",
+    };
+  }
+};

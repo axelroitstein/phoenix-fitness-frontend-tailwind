@@ -1,5 +1,10 @@
+'use client'
+import { useEffect } from "react"
+import { userLogin } from "@/services/user/auth-user-services"
 export default function LandingView(){
-
+    useEffect(() => {
+        userLogin({})
+      }, [])
     return(
 
         <main className=" h-screen grid place-items-center border-white ">
