@@ -1,4 +1,4 @@
-import LandingView from "./sections/home/landing-view"
+import LandingView from "@/sections/home/landing-view"
 
 export default function Home() {
   return (
