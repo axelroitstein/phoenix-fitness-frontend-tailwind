@@ -1,50 +1,55 @@
 export const userLogin = async (data) => {
   try {
-    const response = await fetch("http://localhost:3001/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Allow-Control-Allow-Origin": "*",
-      },
-      body: data,
-    });
-    data = await response.json();
-      
-    console.log(data);
+    console.log(data)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL_API}/api/auth/login`,
+      {
+        cache: 'no-cache',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+    )
+    const fetchResponse = await response.json();
+    return fetchResponse
   } catch (error) {
     if (error.response)
       return {
-        error: "response",
+        error: 'response',
         response: error.response.data,
-        message: "Invalid credentials",
-      };
+        message: 'Invalid credentials'
+      }
 
     if (error.request)
       return {
-        error: "request",
-        message: "Cannot connect to server",
-      };
+        error: 'request',
+        message: 'Cannot connect to server'
+      }
 
     return {
-      error: "unknown",
-      message: "Unknown error",
-    };
+      error: 'unknown',
+      message: 'Unknown error'
+    }
   }
-};
+}
 
 export const userRegister = async (data) => {
   try {
-    const response = await fetch("http://localhost:3001/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Allow-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(data),
-    });
-    data = await response.json();
-    console.log(error);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL_API}/auth/register`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      }
+    )
+    //REVISAR
+    return (data = await response.json())
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
+}
