@@ -1,6 +1,6 @@
 export const createExerciseDay = async (data) => {
   try {
-    const response = await fetch("http://localhost:3001/api/exerciseDays", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const createExerciseDay = async (data) => {
 export const getExerciseDayById = async () => {
   try {
     const response = await fetch(
-      `http://localhost:3001/api/exerciseDays/${id}`,
+      `${process.env.NEXT_PUBLIC_URL_API}/exerciseDays/${id}`,
       {
         body: data,
       }
@@ -65,7 +65,7 @@ export const getExerciseDayById = async () => {
 export const updateExerciseDay = async () => {
   try {
     const response = await fetch(
-      `http://localhost:3001/api/exerciseDays/${id}`,
+      `${process.env.NEXT_PUBLIC_URL_API}/exerciseDays/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -98,7 +98,7 @@ export const updateExerciseDay = async () => {
 export const deleteExerciseDay = async () => {
   try {
     const response = await fetch(
-      `http://localhost:3001/api/exerciseDays/${id}`,
+      `${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays/${id}`,
       {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
