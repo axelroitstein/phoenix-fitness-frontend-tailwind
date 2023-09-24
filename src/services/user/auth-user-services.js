@@ -4,14 +4,15 @@ export const userLogin = async (data) => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL_API}/api/auth/login`,
       {
-        cache: 'no-cache',
+        
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       }
-    )
+      )
+      
     const fetchResponse = await response.json();
     return fetchResponse
   } catch (error) {

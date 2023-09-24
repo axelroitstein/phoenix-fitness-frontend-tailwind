@@ -7,18 +7,17 @@ const LoginForm = () => {
   const [messageError, setMessageError] = useState('')
   const handleSubmit = async (event) => {
     event.preventDefault()
-
+    
     const response = await userLogin(data)
     //Comportamiento raro preguntar porque el response algunas veces anda otras no
     if (response.error != undefined) {
       setMessageError(response.message)
       return setErrorLogin(true)
     }
-    
+
     if (!response.token) {
       return console.log('Token not found')
     }
-
     return localStorage.setItem('token', response.token)
   }
 
@@ -64,3 +63,4 @@ const LoginForm = () => {
 }
 
 export default LoginForm
+
