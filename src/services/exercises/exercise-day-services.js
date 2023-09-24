@@ -1,34 +1,20 @@
 export const createExerciseDay = async (data) => {
   try {
+    const token = localStorage.getItem('token')
+    console.log(token)
     const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Allow-Control-Allow-Origin": "*",
+        "Authorization": `Bearer ${token}`
       },
-
-      body: data,
+      body: JSON.stringify(data)
     });
 
-    data = await response.json();
-    return data;
+    const responseFetch = await response.json();
+    return responseFetch;
   } catch (error) {
-    if (error.response)
-      return {
-        error: "response",
-        response: error.response.data,
-      };
-
-    if (error.request)
-      return {
-        error: "request",
-        message: "Cannot connect to server",
-      };
-
-    return {
-      error: "unknown",
-      message: "Unknown error",
-    };
+   console.log(error)
   }
 };
 
