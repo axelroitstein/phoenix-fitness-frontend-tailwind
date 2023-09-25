@@ -51,35 +51,24 @@ export const getExerciseDayById = async () => {
   }
 }
 
-export const updateExerciseDay = async () => {
+export const updateExerciseDay = async (data,id) => {
   try {
+    const token = localStorage.getItem('token')
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL_API}/exerciseDays/${id}`,
+      `${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays/${id}`,
       {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify(data)
       }
     )
-
-    data = await response.json()
+    const responseFetch = await response.json()
+    return responseFetch
   } catch (error) {
-    if (error.response)
-      return {
-        error: 'response',
-        response: error.response.data
-      }
-
-    if (error.request)
-      return {
-        error: 'request',
-        message: 'Cannot connect to server'
-      }
-
-    return {
-      error: 'unknown',
-      message: 'Unknown error'
-    }
+    console.log(error)
   }
 }
 

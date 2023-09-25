@@ -2,22 +2,26 @@
 
 //Componentes
 import DeleteDayButton from './delete-day-button'
+import EditDayButton from './edit-day-button'
+import AddExerciseButton from './add-exercise-button'
 const ExerciseDay = (props) => {
-  const { idExecirseDay, day, exercises } = props
-  
+  const { idExerciseDay, day, exercises } = props
   return (
-    <>
+    <div className="border-2 border-red-500 margin-top: 2.75rem;">
       <h3>{day}</h3>
-      <div className="border-2 border-blue-500">
-        <p>id:{idExecirseDay}</p>
+
+      <div className="border-2 border-blue-500 ;"></div>
+      <div>
+        <AddExerciseButton idExerciseDay={idExerciseDay} day={day} />
       </div>
       <div className="border-2 border-blue-500">
-        <DeleteDayButton
-          idExecirseDay={idExecirseDay}
-        />
-        <button>Editar</button>
+        <DeleteDayButton idExerciseDay={idExerciseDay} />
       </div>
-    </>
+
+      <div className="border-2 border-blue-500">
+        <EditDayButton idExerciseDay={idExerciseDay} day={day} />
+      </div>
+    </div>
   )
 }
 

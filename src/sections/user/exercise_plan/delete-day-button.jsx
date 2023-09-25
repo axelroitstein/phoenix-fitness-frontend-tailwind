@@ -3,18 +3,17 @@ import {useContext} from 'react'
 import { deleteExerciseDay } from '@/services/exercises/exercise-day-services'
 import { ExercisesContext } from './context-exercises'
 const DeleteDayButton = (props) => {
-  const {idExecirseDay } = props
+  const {idExerciseDay } = props
   const {exercisesDays,setExercisesDays,addAvaibleDays,setAddAvaibleDays,setClicked}=useContext(ExercisesContext)
 
   const handlerClick = async() => {
-    console.log('Console log del id exercise Day',idExecirseDay)
-    const response = await deleteExerciseDay(idExecirseDay)
+    const response = await deleteExerciseDay(idExerciseDay)
     if(response.message==='Exercise day is deleted'){
       const newExerciseDays = exercisesDays.filter((value)=>{
-        return value.id!==idExecirseDay
+        return value.id!==idExerciseDay
       })
       const dayAdded = exercisesDays.find((value)=>{
-        return value.id === idExecirseDay
+        return value.id === idExerciseDay
       })
       setAddAvaibleDays((prev)=>{
         return [...prev,dayAdded.day]
@@ -22,7 +21,6 @@ const DeleteDayButton = (props) => {
       setExercisesDays(newExerciseDays)
     }
     setClicked((prevValue) => !prevValue);
-    console.log(response)
   }
 
   return (

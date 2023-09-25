@@ -60,15 +60,12 @@ export const ExercisesProvider = ({ children }) => {
   }
 
   useEffect(()=>{
-    console.log('Use Efect de ordenamiento de dias options')
     const  sortedExercisesOptions  = addIndexAndSortDays(addAvaibleDays)
     setAddAvaibleDays(sortedExercisesOptions)
   },[clicked])
 
   useEffect(() => {
-    console.log('USEFEEECT')
     const sortedExercisesDays  = addIndexAndSort(exercisesDays)
-    console.log(sortedExercisesDays)
     setExercisesDays(sortedExercisesDays)
   }, [clicked])
 
