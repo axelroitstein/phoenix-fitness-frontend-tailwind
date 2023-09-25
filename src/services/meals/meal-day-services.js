@@ -1,7 +1,7 @@
 export const getMealDays = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays`,
+      `${process.env.NEXT_PUBLIC_URL_API}/api/mealDays`,
       {
         body: data
       }
@@ -31,7 +31,7 @@ export const getMealDays = async () => {
 export const createMealDay = async (data) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays`,
+      `${process.env.NEXT_PUBLIC_URL_API}/api/mealDays`,
       {
         method: 'POST',
         headers: {

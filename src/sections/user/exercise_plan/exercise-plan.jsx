@@ -70,12 +70,12 @@ const ExercisePlan = () => {
   useEffect(() => {
     const sortedExercisesDays = addIndexAndSort(exercisesDays)
     setExercisesDays(sortedExercisesDays)
-    // console.log(
-    //   'this is exercisePlan data info',
-    //   exercisePlanData,
-    //   exercisesDays,
-    //   sortedExercisesDays
-    // )
+    console.log(
+      'this is exercisePlan data info',
+      exercisePlanData,
+      exercisesDays,
+      sortedExercisesDays
+    )
   }, [exercisePlanData])
 
   return (
@@ -83,12 +83,12 @@ const ExercisePlan = () => {
       <div>
         <h2>Plan de ejercicios de {userName}</h2>
       </div>
-      <article className="border-2 border-blue-500">
+      <article >
         {exercisesDays.map((value, index) => {
           return (
             <ExerciseDay
               key={index}
-              idExecirseDay={value.id}
+              idExerciseDay={value.id}
               day={value.day}
               exercises={value.Exercise}
             />

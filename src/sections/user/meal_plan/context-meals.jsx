@@ -1,11 +1,11 @@
 'use client'
 import { createContext, useState, useEffect } from 'react'
 
-export const ExercisesContext = createContext(null)
+export const MealsContext = createContext(null)
 
-export const ExercisesProvider = ({ children }) => {
-  const [exercisePlanData, setExercisePlanData] = useState({})
-  const [exercisesDays, setExercisesDays] = useState([
+export const MealsProvider = ({ children }) => {
+  const [mealPlanData, setMealPlanData] = useState({})
+  const [mealDays, setMealDays] = useState([
     { id: 'nada', day: 'nada' }
   ])
   const [addAvaibleDays, setAddAvaibleDays] = useState([
@@ -40,7 +40,7 @@ export const ExercisesProvider = ({ children }) => {
     const sortedDays = daysWithIndex.map((day) => day.name);
     return sortedDays;
   };
-  const addIndexAndSort = (exercisesDays) => {
+  const addIndexAndSort = (mealDays) => {
     const dayToIndex = {
       Lunes: 0,
       Martes: 1,
@@ -50,32 +50,35 @@ export const ExercisesProvider = ({ children }) => {
       Sábado: 5,
       Domingo: 6
     }
-    const exercisesDaysWithIndex = exercisesDays.map((exerciseDay) => ({
-      ...exerciseDay,
-      index: dayToIndex[exerciseDay.day]
+    const mealDaysWithIndex = mealDays.map((mealDay) => ({
+      ...mealDay,
+      index: dayToIndex[mealDay.day]
     }))
-    exercisesDaysWithIndex.sort((a, b) => a.index - b.index)
+    mealDaysWithIndex.sort((a, b) => a.index - b.index)
 
-    return exercisesDaysWithIndex
+    return mealDaysWithIndex
   }
 
   useEffect(()=>{
-    const  sortedExercisesOptions  = addIndexAndSortDays(addAvaibleDays)
-    setAddAvaibleDays(sortedExercisesOptions)
+    console.log('Use Effect de ordenamiento de dias options')
+    const  sortedMealOptions  = addIndexAndSortDays(addAvaibleDays)
+    setAddAvaibleDays(sortedMealOptions)
   },[clicked])
 
   useEffect(() => {
-    const sortedExercisesDays  = addIndexAndSort(exercisesDays)
-    setExercisesDays(sortedExercisesDays)
+    console.log('USEFEEECT')
+    const sortedMealDays  = addIndexAndSort(mealDays)
+    console.log(sortedMealDays)
+    setMealDays(sortedMealDays)
   }, [clicked])
 
   return (
-    <ExercisesContext.Provider
+    <MealsContext.Provider
       value={{
-        exercisePlanData,
-        setExercisePlanData,
-        exercisesDays,
-        setExercisesDays,
+        mealPlanData,
+        setMealPlanData,
+        mealDays,
+        setMealDays,
         addAvaibleDays,
         setAddAvaibleDays,
         clicked,
@@ -83,6 +86,6 @@ export const ExercisesProvider = ({ children }) => {
       }}
     >
       {children}
-    </ExercisesContext.Provider>
+    </MealsContext.Provider>
   )
 }

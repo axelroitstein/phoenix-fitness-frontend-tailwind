@@ -1,9 +1,9 @@
-import React from 'react'
+import RegisterView from "@/sections/register/register-view"
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+export default function Register(){
+    return(
+        <>
+            <RegisterView/>
+        </>
+    )
 }
-
-export default page
