@@ -1,18 +1,18 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { createExerciseDay } from '@/services/exercises/exercise-day-services'
-import ExercisePlan from './exercise-plan'
-const AddDayButton = (props) => {
-  const { setExercisesDays, exercisesDays, exercisePlanData } = props
-  const [addAvaibleDays, setAddAvaibleDays] = useState([
-    'Lunes',
-    'Martes',
-    'Miercoles',
-    'Jueves',
-    'Viernes',
-    'Sabado',
-    'Domingo'
-  ])
+
+import { ExercisesContext } from './context-exercises'
+const AddDayButton = () => {
+  const {
+    exercisePlanData,
+    exercisesDays,
+    setExercisesDays,
+    addAvaibleDays,
+    setAddAvaibleDays,
+    clicked,
+    setClicked
+  } = useContext(ExercisesContext)
 
   useEffect(() => {
     const newOptions = addAvaibleDays.filter((day) => {
@@ -38,6 +38,7 @@ const AddDayButton = (props) => {
         return [...prevValue, newDay]
       })
     }
+    setClicked((prevValue) => !prevValue);
   }
 
   return (
