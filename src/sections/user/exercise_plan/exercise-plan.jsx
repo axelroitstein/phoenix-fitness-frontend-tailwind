@@ -1,45 +1,101 @@
 'use client'
 
+//Components
+import AddDayButton from './add-day-button'
+import ExerciseDay from './exercise-day'
 //Hooks
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 //Servicios
-import {
-  getExercisePlanByToken,
-  createExercisePlanByToken
-} from '@/services/exercises/exercise-plan-services'
+import { getExercisePlanByToken } from '@/services/exercises/exercise-plan-services'
 
+import { ExercisesContext } from './context-exercises'
+
+//Funcion
+const addIndexAndSort = (exercisesDays) => {
+  const dayToIndex = {
+    Lunes: 0,
+    Martes: 1,
+    Miércoles: 2,
+    Jueves: 3,
+    Viernes: 4,
+    Sábado: 5,
+    Domingo: 6
+  }
+  const exercisesDaysWithIndex = exercisesDays.map((exerciseDay) => ({
+    ...exerciseDay,
+    index: dayToIndex[exerciseDay.day]
+  }))
+  exercisesDaysWithIndex.sort((a, b) => a.index - b.index)
+
+  return exercisesDaysWithIndex
+}
 const ExercisePlan = () => {
   const [token, setToken] = useState('')
-  const [exercisePlanData, setExercisePlanData] = useState({})
+  const [userName, setUserName] = useState('Martin')
+
+  const {
+    exercisePlanData,
+    setExercisePlanData,
+    exercisesDays,
+    setExercisesDays,
+    addAvaibleDays,
+    setAddAvaibleDays
+  } = useContext(ExercisesContext)
 
   //Use effect para traer el token y hacer un get al plan de ejercicio
   useEffect(() => {
     setToken(() => window.localStorage.getItem('token'))
 
     if (token) {
-      const fetchData = async () => {
+      ;(async () => {
         try {
           const response = await getExercisePlanByToken(token)
           if (response.error) {
             console.log(response.error)
           }
-          setExercisePlanData(response)
+          if (response.message === 'jwt expired') {
+            console.log('Token vencido')
+          }
+          setExercisePlanData(response.data)
+          setUserName(response.data.firstName)
+          setExercisesDays(response.data.ExercisesPlan.ExercisesDay)
         } catch (error) {
           console.error('Error en la solicitud:', error)
         }
-      }
-      fetchData()
+      })()
     }
   }, [token])
 
-
   useEffect(() => {
-    console.log('this is exercisePlan data info', exercisePlanData)
+    const sortedExercisesDays = addIndexAndSort(exercisesDays)
+    setExercisesDays(sortedExercisesDays)
+    // console.log(
+    //   'this is exercisePlan data info',
+    //   exercisePlanData,
+    //   exercisesDays,
+    //   sortedExercisesDays
+    // )
   }, [exercisePlanData])
+
   return (
     <section>
-      <h2>Plan de ejercicios de usuario</h2>
+      <div>
+        <h2>Plan de ejercicios de {userName}</h2>
+      </div>
+      <article className="border-2 border-blue-500">
+        {exercisesDays.map((value, index) => {
+          return (
+            <ExerciseDay
+              key={index}
+              idExecirseDay={value.id}
+              day={value.day}
+              exercises={value.Exercise}
+            />
+          )
+        })}
+      </article>
+      <AddDayButton />
     </section>
   )
 }
