@@ -1,8 +1,12 @@
 'use client'
 import { useContext } from 'react'
+//Servicios
 import { ExercisesContext } from './context-exercises'
 import { updateExerciseDay } from '@/services/exercises/exercise-day-services'
 const EditDayButton = (props) => {
+  //Props
+  const { idExerciseDay } = props
+  //Estados
   const {
     addAvaibleDays,
     setAddAvaibleDays,
@@ -11,7 +15,7 @@ const EditDayButton = (props) => {
     setClicked
   } = useContext(ExercisesContext)
 
-  const { day, idExerciseDay } = props
+ 
 
   const handlerEditDay = async (event) => {
     const selectedValue = event.currentTarget.getAttribute('value')
@@ -40,12 +44,9 @@ const EditDayButton = (props) => {
         ])
 
         // Agrega el antiguo nombre nuevamente a las opciones de creación y edición
-        console.log('Viejo day', oldDayName)
         setAddAvaibleDays((prev) => [...prev, oldDayName])
       }
       setClicked((prevValue) => !prevValue)
-      console.log(selectedValue)
-      console.log(addAvaibleDays)
     }
   }
   return (

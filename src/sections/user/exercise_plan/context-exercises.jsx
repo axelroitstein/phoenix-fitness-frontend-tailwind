@@ -4,6 +4,7 @@ import { createContext, useState, useEffect } from 'react'
 export const ExercisesContext = createContext(null)
 
 export const ExercisesProvider = ({ children }) => {
+  //Estados
   const [exercisePlanData, setExercisePlanData] = useState({})
   const [exercisesDays, setExercisesDays] = useState([
     { id: 'nada', day: 'nada' }
@@ -17,10 +18,21 @@ export const ExercisesProvider = ({ children }) => {
     'Sábado',
     'Domingo'
   ])
-  const [clicked,setClicked] = useState(false)
+  const [clicked, setClicked] = useState(false)
 
-   const addIndexAndSortDays = (days) => {
+  // Use effect que ordena dias disponibles:
+  useEffect(() => {
+    const sortedExercisesOptions = addIndexAndSortDays(addAvaibleDays)
+    setAddAvaibleDays(sortedExercisesOptions)
+  }, [clicked])
+  // Use effect que ordena dias de ejercicios:
+  useEffect(() => {
+    const sortedExercisesDays = addIndexAndSort(exercisesDays)
+    setExercisesDays(sortedExercisesDays)
+  }, [clicked])
 
+  //Funciones ordenadoras
+  const addIndexAndSortDays = (days) => {
     const dayToIndex = {
       Lunes: 0,
       Martes: 1,
@@ -28,18 +40,18 @@ export const ExercisesProvider = ({ children }) => {
       Jueves: 3,
       Viernes: 4,
       Sábado: 5,
-      Domingo: 6,
-    };
+      Domingo: 6
+    }
 
     const daysWithIndex = days.map((day) => ({
       name: day,
-      index: dayToIndex[day],
-    }));
-  
-    daysWithIndex.sort((a, b) => a.index - b.index);
-    const sortedDays = daysWithIndex.map((day) => day.name);
-    return sortedDays;
-  };
+      index: dayToIndex[day]
+    }))
+
+    daysWithIndex.sort((a, b) => a.index - b.index)
+    const sortedDays = daysWithIndex.map((day) => day.name)
+    return sortedDays
+  }
   const addIndexAndSort = (exercisesDays) => {
     const dayToIndex = {
       Lunes: 0,
@@ -58,17 +70,7 @@ export const ExercisesProvider = ({ children }) => {
 
     return exercisesDaysWithIndex
   }
-
-  useEffect(()=>{
-    const  sortedExercisesOptions  = addIndexAndSortDays(addAvaibleDays)
-    setAddAvaibleDays(sortedExercisesOptions)
-  },[clicked])
-
-  useEffect(() => {
-    const sortedExercisesDays  = addIndexAndSort(exercisesDays)
-    setExercisesDays(sortedExercisesDays)
-  }, [clicked])
-
+  
   return (
     <ExercisesContext.Provider
       value={{

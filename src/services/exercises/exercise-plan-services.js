@@ -1,6 +1,5 @@
 export const getExercisePlanByToken = async (token) => {
   try {
-    console.log('token is', token)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL_API}/api/exercisePlans`,
       {

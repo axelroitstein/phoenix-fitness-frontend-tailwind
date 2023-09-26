@@ -1,10 +1,13 @@
 'use client'
 import {useContext} from 'react'
+//Servicios
 import { deleteExerciseDay } from '@/services/exercises/exercise-day-services'
 import { ExercisesContext } from './context-exercises'
 const DeleteDayButton = (props) => {
+  //Props
   const {idExerciseDay } = props
-  const {exercisesDays,setExercisesDays,addAvaibleDays,setAddAvaibleDays,setClicked}=useContext(ExercisesContext)
+  //Estados
+  const {exercisesDays,setExercisesDays,setAddAvaibleDays,setClicked}=useContext(ExercisesContext)
 
   const handlerClick = async() => {
     const response = await deleteExerciseDay(idExerciseDay)

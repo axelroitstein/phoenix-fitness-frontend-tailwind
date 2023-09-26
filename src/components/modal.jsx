@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Modal = ({ isOpen, closeModal, onSubmit }) => {
+const Modal = ({ isOpen, closeModal, onSubmit,title,placeHolder }) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e) => {
@@ -9,6 +9,7 @@ const Modal = ({ isOpen, closeModal, onSubmit }) => {
 
   const handleSubmit = () => {
     onSubmit(inputValue);
+    setInputValue('')
     closeModal();
   };
 
@@ -19,12 +20,12 @@ const Modal = ({ isOpen, closeModal, onSubmit }) => {
       } transition-opacity duration-300`}
     >
       <div className="bg-white w-full md:w-1/2 lg:w-1/3 p-4 rounded-lg shadow-lg">
-        <h2 className="text-lg font-semibold mb-4">Modal Title</h2>
+        <h2 className="text-lg font-semibold mb-4">{title}</h2>
         <input
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Escribe una oración"
+          placeholder={placeHolder}
           className="w-full p-2 border border-gray-300 rounded mb-4"
         />
         <div className="flex justify-end">
