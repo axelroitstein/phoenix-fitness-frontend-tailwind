@@ -1,11 +1,10 @@
-import LandingView from "@/sections/home/landing-view"
-
+import HeaderAndFooter from "@/sections/home/footer"
 
 export default function Home() {
   
   return (
     <main>
-      <LandingView/>
+      <HeaderAndFooter/>
     </main>
   )
 }

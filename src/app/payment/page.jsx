@@ -1,9 +1,7 @@
-import React from 'react'
+import PaymentView from "@/sections/payment-view.jsx/payment-view";
 
-const page = () => {
+export default function Payment () {
   return (
-    <div>page</div>
+    <PaymentView/>
   )
 }
-
-export default page

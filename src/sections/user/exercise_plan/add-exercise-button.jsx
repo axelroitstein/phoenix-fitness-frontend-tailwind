@@ -41,7 +41,7 @@ const AddExerciseButton = (props) => {
     }
     const response = await createExercise(newData)
     console.log(response)
-    if (response.succes === true) {
+    if (response.success === true) {
       const exerciseId = response.data.id
       const newDataForState = {
         exerciseName: value,
