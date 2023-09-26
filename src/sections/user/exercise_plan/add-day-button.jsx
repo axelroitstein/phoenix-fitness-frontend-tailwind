@@ -1,9 +1,11 @@
 'use client'
 import { useEffect, useContext } from 'react'
+//Servicios
 import { createExerciseDay } from '@/services/exercises/exercise-day-services'
-
 import { ExercisesContext } from './context-exercises'
+
 const AddDayButton = () => {
+  //Estados
   const {
     exercisePlanData,
     exercisesDays,
@@ -13,7 +15,7 @@ const AddDayButton = () => {
     clicked,
     setClicked
   } = useContext(ExercisesContext)
-
+  //Use effect
   useEffect(() => {
     const newOptions = addAvaibleDays.filter((day) => {
       return !exercisesDays.some((exerciseDay) => exerciseDay.day === day)
@@ -30,9 +32,11 @@ const AddDayButton = () => {
     }
     const response = await createExerciseDay(data)
     if (response.message === 'Exercises day is created') {
+      console.log(response)
       const newDay = {
         id: response.data.id,
-        day: response.data.day
+        day: response.data.day,
+        Exercise:response.data.Exercise
       }
       setExercisesDays((prevValue) => {
         return [...prevValue, newDay]

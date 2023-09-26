@@ -10,9 +10,9 @@ const UserView = () => {
       <ExercisesProvider>
         <ExercisePlan />
       </ExercisesProvider>
-      {/* <MealsProvider>
+      <MealsProvider>
         <MealPlan/>
-      </MealsProvider> */}
+      </MealsProvider>
     </>
   )
 }

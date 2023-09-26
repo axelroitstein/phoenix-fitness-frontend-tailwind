@@ -1,10 +1,28 @@
 import { useForm } from "react-hook-form"
-
+import { userRegister } from "@/services/user/auth-user-services"
+import { useRouter } from 'next/navigation'
 export default function RegisterForm(){
+    const router = useRouter()
    const{register, handleSubmit, formState:{errors}} = useForm({criteriaMode:'all'})
 
-   const onSubmit = handleSubmit((data) => {
-    console.log(data)})
+   const onSubmit = handleSubmit (async (data) => {
+    console.log(data)
+    const iso8601Date = new Date(data.birthDay).toISOString();
+    const newData = {
+        firstName:data.firstName,
+          lastName:data.lastName,
+          email:data.email,
+          password:data.password,
+          phone:data.firstName,
+          address:data.address,
+          birthDay:iso8601Date
+    }
+    const response = await  userRegister(newData)
+    console.log(response)
+    if(response.message === 'User created'){
+        router.push('/')
+    }
+})
 
     console.log(errors)
 
@@ -23,10 +41,10 @@ export default function RegisterForm(){
                 {
                     errors.lastName && <span className="text-red-600 text-xs">Apellido es requerido</span>
                 }
-                <label htmlFor="mail"> Correo electrónico: </label>
-                <input type="email"  {...register('mail',  {required:true})} placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
+                <label htmlFor="email"> Correo electrónico: </label>
+                <input type="email"  {...register('email',  {required:true})} placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
                 {
-                    errors.mail && <span className="text-red-600 text-xs">Correo es requerido</span>
+                    errors.email && <span className="text-red-600 text-xs">Correo es requerido</span>
                 }
                 <label htmlFor="password"> Contraseña: </label>
                 <input type="password"  {...register('password',  {required:true})}   placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
@@ -43,10 +61,10 @@ export default function RegisterForm(){
                 {
                     errors.address && <span className="text-red-600 text-xs">Dirección es requerida</span>
                 }
-                <label htmlFor="birthdate"> Fecha de nacimiento: </label>
-                <input type="date"  {...register('birthdate', {required:true})} placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
+                <label htmlFor="birthDay"> Fecha de nacimiento: </label>
+                <input type="date"  {...register('birthDay', {required:true})} placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
                 {
-                    errors.birthdate && <span className="text-red-600 text-xs">Fecha de nacimiento es requerida</span>
+                    errors.birthDay && <span className="text-red-600 text-xs">Fecha de nacimiento es requerida</span>
                 }
                 <button type ='submit' className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-orange-400 text-black hover:bg-orange-400">Registrate</button>
             </form>

@@ -1,14 +1,13 @@
 'use client'
+//Hooks
+import { useContext, useEffect, useState } from 'react'
 
 //Components
 import AddDayButton from './add-day-button'
 import ExerciseDay from './exercise-day'
-//Hooks
-import { useContext, useEffect, useState } from 'react'
 
 //Servicios
 import { getExercisePlanByToken } from '@/services/exercises/exercise-plan-services'
-
 import { ExercisesContext } from './context-exercises'
 
 //Funcion
@@ -84,7 +83,7 @@ const ExercisePlan = () => {
         <h2>Plan de ejercicios de {userName}</h2>
       </div>
       <article >
-        {exercisesDays.map((value, index) => {
+        {exercisesDays?.length>0? exercisesDays.map((value, index) => {
           return (
             <ExerciseDay
               key={index}
@@ -93,7 +92,7 @@ const ExercisePlan = () => {
               exercises={value.Exercise}
             />
           )
-        })}
+        }):null}
       </article>
       <AddDayButton />
     </section>

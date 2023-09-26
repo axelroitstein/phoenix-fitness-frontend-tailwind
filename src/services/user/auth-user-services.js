@@ -38,18 +38,23 @@ export const userLogin = async (data) => {
 
 export const userRegister = async (data) => {
   try {
+    console.log(data)
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL_API}/auth/register`,
+      `${process.env.NEXT_PUBLIC_URL_API}/api/auth/register`,
       {
+        
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: data
+        body: JSON.stringify(data)
       }
-    )
+      )
+    console.log(response)
     //REVISAR
-    return (data = await response.json())
+    const fetchResponse = await response.json();
+    console.log(fetchResponse)
+    return fetchResponse
   } catch (error) {
     console.log(error)
   }

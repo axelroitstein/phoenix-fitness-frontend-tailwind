@@ -1,7 +1,6 @@
 export const createExerciseDay = async (data) => {
   try {
     const token = localStorage.getItem('token')
-    console.log(token)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays`,
       {
@@ -75,8 +74,6 @@ export const updateExerciseDay = async (data,id) => {
 export const deleteExerciseDay = async (id) => {
   try {
     const token = localStorage.getItem('token')
-    console.log(token)
-    console.log(id)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL_API}/api/exerciseDays/${id}`,
       {

@@ -95,35 +95,25 @@ export const getMealDayById = async () => {
   }
 }
 
-export const updateMealDay = async () => {
+export const updateMealDay = async (data,id) => {
+  console.log(id,'Meal Day',data)
   try {
+    const token = localStorage.getItem('token')
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL_API}/api/mealDays/${id}`,
       {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify(data)
       }
     )
-
-    data = await response.json()
+    const responseFetch = await response.json()
+    return responseFetch
   } catch (error) {
-    if (error.response)
-      return {
-        error: 'response',
-        response: error.response.data
-      }
-
-    if (error.request)
-      return {
-        error: 'request',
-        message: 'Cannot connect to server'
-      }
-
-    return {
-      error: 'unknown',
-      message: 'Unknown error'
-    }
+    console.log(error)
   }
 }
 
